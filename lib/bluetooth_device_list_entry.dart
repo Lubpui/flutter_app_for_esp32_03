@@ -46,7 +46,7 @@ class BluetoothDeviceListEntry extends ListTile {
         );
 
   static TextStyle _computeTextStyle(int rssi) {
-    /**/ if (rssi >= -35)
+    if (rssi >= -35)
       return TextStyle(color: Colors.greenAccent[700]);
     else if (rssi >= -45)
       return TextStyle(
@@ -68,7 +68,6 @@ class BluetoothDeviceListEntry extends ListTile {
           color: Color.lerp(
               Colors.deepOrangeAccent, Colors.redAccent, -(rssi + 75) / 10));
     else
-      /*code symmetry*/
       return TextStyle(color: Colors.redAccent);
   }
 }
