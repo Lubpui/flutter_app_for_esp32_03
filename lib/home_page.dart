@@ -116,7 +116,8 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               SizedBox(height: 20),
-              Text(widget.device.address)
+              Text(widget.device.name!),
+              Text(widget.device.address),
             ],
           ),
         ),
