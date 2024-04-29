@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_for_esp32_03/bluetooth_device_list_entry.dart';
 import 'package:flutter_app_for_esp32_03/home_page.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DiscoveryPage extends StatefulWidget {
   final bool start;
@@ -30,7 +31,7 @@ class _DiscoveryPage extends State<DiscoveryPage> {
 
     isDiscovering = widget.start;
     if (isDiscovering) {
-      _startDiscovery();
+      requestBluetoothPermission();
     }
   }
 
@@ -41,6 +42,15 @@ class _DiscoveryPage extends State<DiscoveryPage> {
     });
 
     _startDiscovery();
+  }
+
+  void requestBluetoothPermission() async {
+    PermissionStatus bluetoothStatus = await Permission.bluetoothScan.request();
+    PermissionStatus locationStatus = await Permission.location.request();
+
+    if (bluetoothStatus.isGranted && locationStatus.isGranted) {
+      _startDiscovery();
+    }
   }
 
   void _startDiscovery() {
