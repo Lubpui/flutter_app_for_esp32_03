@@ -46,9 +46,10 @@ class _DiscoveryPage extends State<DiscoveryPage> {
 
   void requestBluetoothPermission() async {
     PermissionStatus bluetoothStatus = await Permission.bluetoothScan.request();
-    PermissionStatus locationStatus = await Permission.location.request();
+    PermissionStatus bluetoothConnectStatus =
+        await Permission.bluetoothConnect.request();
 
-    if (bluetoothStatus.isGranted && locationStatus.isGranted) {
+    if (bluetoothStatus.isGranted && bluetoothConnectStatus.isGranted) {
       _startDiscovery();
     }
   }
